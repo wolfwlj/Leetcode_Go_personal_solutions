@@ -18,40 +18,64 @@ func main() {
 
 }
 func maxProfit(prices []int) int {
-	highestProfit := 0
-	lowest := 0
-	highest := 0
-	// len := len(prices)
-	for i := 0; i < len(prices); i++ {
+	// highestProfit := 0
+	// lowest := 0
+	// highest := 0
+	// // len := len(prices)
+	// for i := 0; i < len(prices); i++ {
 
-		if prices[i] > highest {
-			highest = prices[i]
-			fmt.Println(i)
+	// 	if prices[i] > highest {
+	// 		highest = prices[i]
+	// 		fmt.Println(i)
 
-		} 
-		if i == 0 {lowest = prices[i]}
-		if prices[i] < lowest  {
+	// 	} 
+	// 	if i == 0 {lowest = prices[i]}
+	// 	if prices[i] < lowest  {
 
-			if i+1 != len(prices) {
-				lowest = prices[i]
-				highest = 0
+	// 		if i+1 != len(prices) {
+	// 			lowest = prices[i]
+	// 			highest = 0
 				
-			}
+	// 		}
 
-		}
+	// 	}
 
-		// A comment.
-		// fmt.Println(i+1, len(prices))
-		fmt.Println(i, highest, lowest)
+	// 	// A comment.
+	// 	// fmt.Println(i+1, len(prices))
+	// 	fmt.Println(i, highest, lowest)
 
-		if (highest - lowest > highestProfit) {
-			highestProfit = highest - lowest
-		}
+	// 	if (highest - lowest > highestProfit) {
+	// 		highestProfit = highest - lowest
+	// 	}
 
 
-	}
+	// }
 	
-	if highestProfit > 0 {return highestProfit}
+	// if highestProfit > 0 {return highestProfit}
 
-	return 0
+	// return 0
+
+	// better solution, less run time and memory
+	l := 0
+	r := 1
+	highestProfit := 0
+
+	for r < len(prices) {
+		if prices[l] < prices[r] {
+			profit := prices[r] - prices[l]
+			highestProfit = Max(highestProfit, profit)
+		} else {
+			l = r
+		}
+		r +=1
+	}
+	return highestProfit
+}
+
+
+func Max(x, y int) int {
+    if x < y {
+        return y
+    }
+    return x
 }
